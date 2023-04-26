@@ -1,0 +1,7 @@
+PyQt6
+firebase-admin
+google-cloud-firestore
+reportlab
+firebase 
+firebase-auth
+pyinstaller
