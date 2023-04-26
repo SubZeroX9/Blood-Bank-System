@@ -1,4 +1,4 @@
-from app.models.donor import Donor
+from models.donor import Donor
 
 
 class DonorController:

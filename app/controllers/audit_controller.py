@@ -1,4 +1,4 @@
-from app.models.audit import Audit
+from models.audit import Audit
 
 
 class AuditController:

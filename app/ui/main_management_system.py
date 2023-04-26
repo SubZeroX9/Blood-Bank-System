@@ -1,5 +1,5 @@
 from PyQt6 import QtWidgets, uic
-from app.controllers.blood_bank_controller import BloodBankController
+from controllers.blood_bank_controller import BloodBankController
 
 
 class MainManagementSystem(QtWidgets.QMainWindow):

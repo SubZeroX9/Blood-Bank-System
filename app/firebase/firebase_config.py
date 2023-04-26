@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 cred = credentials.Certificate(
-    "firebase/bloodbank-f9243-firebase-adminsdk-sqjbj-db358b0b61.json")
+    "app/firebase/bloodbank-f9243-firebase-adminsdk-sqjbj-db358b0b61.json")
 firebase_admin.initialize_app(cred)
 
 

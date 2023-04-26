@@ -1,11 +1,9 @@
-from app.models.audit import Audit
-from firebase_admin import firestore, db
+from models.audit import Audit
+from firebase_admin import firestore
+from firebase.firebase_config import db
 
 
 class BloodBank:
-
-    # Initialize the Firestore database
-    db = firestore.client()
 
     @staticmethod
     def add(quantity, blood_type, donor_id, staff_id, user_id):
@@ -84,10 +82,11 @@ class BloodBank:
         blood_groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
         default_inventory = {blood_group: 0 for blood_group in blood_groups}
 
-        blood_bank_ref = db.collection("blood_bank")
+        blood_bank_ref = db.collection("blood_bank").document("Inventory")
 
         # Check if blood inventory exists
         blood_inventory = blood_bank_ref.get()
 
         if not blood_inventory.exists:  # If blood inventory doesn't exist, initialize it
+            print("Initializing blood inventory...")
             blood_bank_ref.set(default_inventory)

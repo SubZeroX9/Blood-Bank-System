@@ -1,8 +1,8 @@
 import sys
 from PyQt6.QtWidgets import QApplication
-from app.ui.login import Login
-from app.ui.main_management_system import MainManagementSystem
-from app.controllers.blood_bank_controller import BloodBankController
+from ui.login import Login
+from ui.main_management_system import MainManagementSystem
+from controllers.blood_bank_controller import BloodBankController
 
 
 def on_login_successful(user_id):

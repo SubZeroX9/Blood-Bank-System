@@ -1,4 +1,4 @@
-from app.models.blood_bank import BloodBank
+from models.blood_bank import BloodBank
 
 
 class BloodBankController:

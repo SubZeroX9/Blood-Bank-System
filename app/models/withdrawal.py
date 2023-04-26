@@ -1,8 +1,4 @@
-from google.cloud import firestore
 from firebase.firebase_config import *
-
-db = firestore.Client()
-
 
 class Withdrawal:
 

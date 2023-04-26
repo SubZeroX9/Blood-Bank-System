@@ -1,5 +1,5 @@
-from app.models.record_copy import RecordCopy
-from app.utils.pdf_exporter import export_record_copy_to_pdf
+from models.record_copy import RecordCopy
+from Utils.pdf_exporter import export_record_copy_to_pdf
 
 
 class RecordCopyController:

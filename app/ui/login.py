@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QMessageBox
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.uic import loadUi
-from app.controllers import user_controller
+from controllers.user_controller import UserController
 
 
 class Login(QWidget):
@@ -11,7 +11,7 @@ class Login(QWidget):
     def __init__(self, parent=None):
         super(Login, self).__init__(parent)
 
-        loadUi("ui/login.ui", self)
+        loadUi("app/ui/login.ui", self)
 
         self.login_button.clicked.connect(self.login_button_clicked)
 
@@ -19,7 +19,7 @@ class Login(QWidget):
         email = self.email_line_edit.text()
         password = self.password_line_edit.text()
 
-        user_id = user_controller.authenticate(email, password)
+        user_id = UserController.authenticate(email, password)
 
         if user_id is not None:
             print("User authenticated successfully")
