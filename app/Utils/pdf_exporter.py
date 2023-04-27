@@ -1,25 +1,33 @@
-from reportlab.lib.pagesizes import letter, landscape
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from datetime import datetime
 
 
 def export_records_to_pdf(records, filename):
-    pdf = SimpleDocTemplate(filename, pagesize=landscape(letter))
+    pdf = SimpleDocTemplate(filename, pagesize=landscape(A4))
 
     # Convert the records into a table format
     # Add column headers
-    data = [["Record ID", "Field 1", "Field 2", "Field 3"]]
-
-    for record in records:
+    header = ["Time", "Action", "User Id", "Technician ID",
+              "Blood Group", "Quantity", "Donor Name", "Donor ID"]
+    data = [header]
+    for record in records.values():
         row = [
-            record["record_id"],
-            record["field1"],
-            record["field2"],
-            record["field3"],
+            str(record["timestamp"].strftime("%d-%m-%Y %H:%M:%S")),
+            str(record["action"]),
+            str(record["user_id"]),
+            str(record["technician_id"]),
+            str(record["blood_group"]),
+            str(record["quantity"]),
+            str(record["donor_full_name"]
+                ) if record["action"] == "add" else "N/A",
+            str(record["donor_id"]) if record["action"] == "add" else "N/A"
         ]
         data.append(row)
 
     table = Table(data)
+    table.colWidths = [100, 70, 80, 100, 80, 80, 100, 80]
 
     # Apply table styles
     table.setStyle(

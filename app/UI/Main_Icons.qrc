@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="Button_Icons">
+    <file>Icons/refresh.png</file>
+    <file>Icons/refresh-page-option.png</file>
+    <file>Icons/IconClose.png</file>
+  </qresource>
+  <qresource prefix="Images">
+    <file>Images/Background2.png</file>
+    <file>Images/Background.png</file>
+  </qresource>
+  <qresource prefix="Logo_Icons">
+    <file>Icons/IconLogo.png</file>
+  </qresource>
+</RCC>

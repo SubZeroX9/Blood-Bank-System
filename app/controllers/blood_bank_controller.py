@@ -4,9 +4,9 @@ from models.blood_bank import BloodBank
 class BloodBankController:
 
     @staticmethod
-    def add_blood(quantity, blood_type, donor_id, staff_id, user_id):
+    def add_blood(blood_type, donor_id, donor_full_name, staff_id, user_id):
         # Add blood to the blood bank
-        return BloodBank.add(quantity, blood_type, donor_id, staff_id, user_id)
+        return BloodBank.add(blood_type, donor_id, donor_full_name, staff_id, user_id)
 
     @staticmethod
     def withdraw_blood(quantity, blood_type, staff_id, user_id):
@@ -33,9 +33,32 @@ class BloodBankController:
     def get_blood_data_by_group(blood_group):
         # Fetch blood types and quantities for the given blood group from the database
         inventory = BloodBank.get_inventory()
-        blood_data = [(blood_type, quantity) for blood_type,
-                      quantity in inventory.items() if blood_type[0] == blood_group]
+        blood_data = []
+        if blood_group == "All":
+            for blood_type, quantity in inventory.items():
+                blood_data.append((blood_type, quantity))
+        else:
+            compatible_blood_types = BloodBankController.get_compatible_blood_types(
+                blood_group)
+            for blood_type in compatible_blood_types:
+                if blood_type in inventory:
+                    blood_data.append((blood_type, inventory[blood_type]))
+
         return blood_data
+
+    @staticmethod
+    def get_compatible_blood_types(blood_group):
+        compatibility = {
+            "A+": ["A+", "A-", "O+", "O-"],
+            "A-": ["A-", "O-"],
+            "B+": ["B+", "B-", "O+", "O-"],
+            "B-": ["B-", "O-"],
+            "AB+": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+            "AB-": ["A-", "B-", "AB-", "O-"],
+            "O+": ["O+", "O-"],
+            "O-": ["O-"]
+        }
+        return compatibility.get(blood_group, [])
 
     @staticmethod
     def add_inventory_listener(callback):

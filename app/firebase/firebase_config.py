@@ -17,3 +17,13 @@ firebase_config = {
 }
 
 db = firestore.client()
+batch = db.batch()
+
+
+def commit_batch(batch):
+    try:
+        batch.commit()
+        return True
+    except Exception as e:
+        print("Batch commit failed. Error:", e)
+        return False
