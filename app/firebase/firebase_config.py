@@ -1,8 +1,10 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+from Utils.resource_finder import resource_path
+
 
 cred = credentials.Certificate(
-    "app/firebase/bloodbank-f9243-firebase-adminsdk-sqjbj-db358b0b61.json")
+    resource_path("firebase\\bloodbank-f9243-firebase-adminsdk-sqjbj-db358b0b61.json"))
 firebase_admin.initialize_app(cred)
 
 

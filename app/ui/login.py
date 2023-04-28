@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QWidget, QMessageBox, QGraphicsDropShadowEffect
 from PyQt6.QtGui import QColor
 from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.uic import loadUi
+from Utils.resource_finder import resource_path
 from controllers.user_controller import UserController
 
 
@@ -12,7 +13,7 @@ class Login(QWidget):
     def __init__(self, parent=None):
         super(Login, self).__init__(parent)
 
-        loadUi("app/ui/login.ui", self)
+        loadUi(resource_path("UI\\login.ui"), self)
 
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)

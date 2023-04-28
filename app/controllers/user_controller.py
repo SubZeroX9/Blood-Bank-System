@@ -1,6 +1,4 @@
-# user_controller.py
 import requests
-from firebase_admin import auth
 from firebase.firebase_config import firebase_config
 
 

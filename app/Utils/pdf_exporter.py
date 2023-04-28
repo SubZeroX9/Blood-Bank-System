@@ -1,11 +1,19 @@
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
-from datetime import datetime
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 def export_records_to_pdf(records, filename):
     pdf = SimpleDocTemplate(filename, pagesize=landscape(A4))
+    styles = getSampleStyleSheet()
+    title_style = styles['Heading1']
+
+    # Create the title paragraph
+    title = Paragraph("Blood Bank Report", title_style)
+
+    # Add the title paragraph and a spacer to the document
+    pdf_elements = [title, Spacer(1, 24)]
 
     # Convert the records into a table format
     # Add column headers
@@ -49,4 +57,6 @@ def export_records_to_pdf(records, filename):
         )
     )
 
-    pdf.build([table])
+    pdf_elements.append(table)
+
+    pdf.build(pdf_elements)

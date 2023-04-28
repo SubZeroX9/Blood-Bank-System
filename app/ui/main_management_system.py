@@ -1,9 +1,10 @@
 import os
 from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
-from PyQt6.QtCore import Qt, QTimer, QStandardPaths
+from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor
 from Utils.pdf_exporter import export_records_to_pdf
+from Utils.resource_finder import resource_path
 from controllers.audit_controller import AuditController
 from controllers.blood_bank_controller import BloodBankController
 
@@ -14,7 +15,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
 
     def __init__(self, user_id):
         super().__init__()
-        uic.loadUi("app/ui/main_management_system.ui", self)
+        uic.loadUi(resource_path("UI\\main_management_system.ui"), self)
 
         self.setWindowFlag(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
@@ -66,6 +67,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
                 row, 0, QtWidgets.QTableWidgetItem(blood_type))
             self.inventory_table.setItem(
                 row, 1, QtWidgets.QTableWidgetItem(str(quantity)))
+        self.set_alignment_for_all_items_in_inventory()
 
     def handle_donations_tab(self):
         self.donate_button.clicked.connect(self.DonateBloodClicked)
@@ -304,6 +306,21 @@ class MainManagementSystem(QtWidgets.QMainWindow):
                     i, 6, QtWidgets.QTableWidgetItem(str(record["donor_full_name"])))
                 self.records_table.setItem(
                     i, 7, QtWidgets.QTableWidgetItem(str(record["donor_id"])))
+        self.set_alignment_for_all_items_in_records()
 
     def on_audit_changed(self,  keys, changes, read_time):
         self.update_records_table()
+
+    def set_alignment_for_all_items_in_records(self, alignment=Qt.AlignmentFlag.AlignCenter):
+        for row in range(self.records_table.rowCount()):
+            for column in range(self.records_table.columnCount()):
+                item = self.records_table.item(row, column)
+                if item:
+                    item.setTextAlignment(alignment)
+
+    def set_alignment_for_all_items_in_inventory(self, alignment=Qt.AlignmentFlag.AlignCenter):
+        for row in range(self.inventory_table.rowCount()):
+            for column in range(self.inventory_table.columnCount()):
+                item = self.inventory_table.item(row, column)
+                if item:
+                    item.setTextAlignment(alignment)
