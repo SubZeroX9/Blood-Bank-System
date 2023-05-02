@@ -18,7 +18,7 @@ The Blood Bank System is a desktop application that helps manage blood donations
 
 To install the Blood Bank System, follow these steps:
 
-1. Download the latest release from the GitHub repository(https://github.com/SubZeroX9/Blood-Bank-System).(Download Link with SCE mail: https://drive.google.com/file/d/1qO5mMlaaHrNwdCxzpEDwGI_O8TShB_KF/view?usp=sharing)
+1. Download the latest release from the GitHub repository(https://github.com/SubZeroX9/Blood-Bank-System).
 2. Extract the zip file to a directory on your computer.
 3. Run the Blood Bank Manager.exe file to start the application.
 
