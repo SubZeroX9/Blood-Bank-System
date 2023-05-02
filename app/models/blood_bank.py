@@ -21,7 +21,7 @@ class BloodBank:
 
         # Add audit trail entry for the blood donation
         Audit.add({
-            'action': 'add',
+            'action': 'Add',
             'quantity': quantity,
             'blood_group': blood_type,
             'donor_id': donor_id,
@@ -55,7 +55,34 @@ class BloodBank:
 
         # Add audit trail entry for the blood withdrawal
         Audit.add({
-            'action': 'withdraw',
+            'action': 'Withdraw',
+            'quantity': quantity,
+            'blood_group': blood_type,
+            'technician_id': staff_id,
+            'user_id': user_id,
+            'timestamp': firestore.SERVER_TIMESTAMP
+        })
+
+        return commit_batch(batch)
+
+    @staticmethod
+    def withdraw_emergency(quantity, blood_type, staff_id, user_id):
+        # Withdraw blood from the blood bank and store related information in the database
+        blood_bank_ref = db.collection(
+            'blood_bank').document("Inventory")
+
+        # Fetch the current quantity of the blood type
+        current_quantity = BloodBank.get_quantity(blood_type)
+        if current_quantity < quantity:
+            return False
+        # Update the blood quantity
+        batch.set(blood_bank_ref, {
+            blood_type: max(0, current_quantity - quantity)
+        }, merge=True)
+
+        # Add audit trail entry for the blood withdrawal
+        Audit.add({
+            'action': 'Withdraw Emergency',
             'quantity': quantity,
             'blood_group': blood_type,
             'technician_id': staff_id,

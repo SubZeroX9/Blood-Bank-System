@@ -10,7 +10,6 @@ main_management_system_window = None
 
 def on_login_successful(user_id):
     login_window.close()  # Close the login window
-
     # Create an instance of the main_management_system window and show it
     global main_management_system_window
     main_management_system_window = MainManagementSystem(user_id)

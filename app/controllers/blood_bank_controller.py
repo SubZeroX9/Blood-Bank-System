@@ -14,6 +14,11 @@ class BloodBankController:
         return BloodBank.withdraw(quantity, blood_type, staff_id, user_id)
 
     @staticmethod
+    def withdraw_blood_emergency(quantity, blood_type, staff_id, user_id):
+        # Withdraw blood from the blood bank in an emergency
+        return BloodBank.withdraw_emergency(quantity, blood_type, staff_id, user_id)
+
+    @staticmethod
     def get_blood_inventory():
         # Get the current blood inventory in the blood bank
         return BloodBank.get_inventory()

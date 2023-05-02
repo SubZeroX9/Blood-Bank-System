@@ -3,10 +3,12 @@ from PyQt6 import QtWidgets, uic
 from PyQt6.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor
-from Utils.pdf_exporter import export_records_to_pdf
+from Utils.pdf_exporter import export_records_to_pdf, export_inventory_to_pdf
 from Utils.resource_finder import resource_path
+from firebase.firebase_config import commit_batch, batch
 from controllers.audit_controller import AuditController
 from controllers.blood_bank_controller import BloodBankController
+from firebase_admin import firestore
 
 
 class MainManagementSystem(QtWidgets.QMainWindow):
@@ -31,6 +33,13 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.setEffects()
         # Call the function after 100 ms
         QTimer.singleShot(100, self.check_o_minus_avilability)
+        self.loged_in_log()
+
+    def loged_in_log(self):
+        AuditController.add({'action': 'login',
+                             'user_id': self.user_id,
+                             'timestamp': firestore.SERVER_TIMESTAMP})
+        commit_batch(batch)
 
     def check_o_minus_avilability(self):
         # Check if there is enough O- blood to issue for an emergency
@@ -147,6 +156,8 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.blood_group_filter.currentTextChanged.connect(
             self.update_inventory_table)
         self.issue_blood_button.clicked.connect(self.handle_issue_blood_click)
+        self.inventory_export_button.clicked.connect(
+            self.handle_export_inventory_click)
         self.inventory_table.horizontalHeader().setVisible(True)
 
         self.update_inventory_table()
@@ -222,7 +233,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             self.WarningMassage(massage, title, text)
             return
 
-        if not BloodBankController.withdraw_blood(quantity, blood_group, staff_id, self.user_id):
+        if not BloodBankController.withdraw_blood_emergency(quantity, blood_group, staff_id, self.user_id):
             message = "Failed to issue blood."
             title = "Issue Failed"
             text = "Failed to issue blood. Please try again."
@@ -266,7 +277,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             blurRadius=20, xOffset=0, yOffset=0, color=QColor(184, 57, 65, 255)))
 
     def handle_export_click(self):
-        initial_name = "Blood Bank Report.pdf"
+        initial_name = "Blood Bank Records Report.pdf"
         file_name = QFileDialog.getSaveFileName(self, 'Export to PDF',
                                                 os.path.join(os.path.expanduser('~'), initial_name), 'PDF(*.pdf)')
         if file_name[0] != '':
@@ -292,20 +303,25 @@ class MainManagementSystem(QtWidgets.QMainWindow):
                 i, 1, QtWidgets.QTableWidgetItem(str(record['action'])))
             self.records_table.setItem(
                 i, 2, QtWidgets.QTableWidgetItem(str(record['user_id'])))
-            self.records_table.setItem(
-                i, 3, QtWidgets.QTableWidgetItem(str(record["technician_id"])))
-            self.records_table.setItem(
-                i, 4, QtWidgets.QTableWidgetItem(str(record["blood_group"])))
-            self.records_table.setItem(
-                i, 5, QtWidgets.QTableWidgetItem(str(record["quantity"])))
-            if record["action"] == "withdraw":
-                record["donor_full_name"] = "-"
-                record["donor_id"] = "-"
-            else:
+            if record['action'] == "Add":
+                self.records_table.setItem(
+                    i, 3, QtWidgets.QTableWidgetItem(str(record["technician_id"])))
+                self.records_table.setItem(
+                    i, 4, QtWidgets.QTableWidgetItem(str(record["blood_group"])))
+                self.records_table.setItem(
+                    i, 5, QtWidgets.QTableWidgetItem(str(record["quantity"])))
                 self.records_table.setItem(
                     i, 6, QtWidgets.QTableWidgetItem(str(record["donor_full_name"])))
                 self.records_table.setItem(
                     i, 7, QtWidgets.QTableWidgetItem(str(record["donor_id"])))
+            elif record['action'] == "Withdraw" or record['action'] == "Withdraw Emergency":
+                self.records_table.setItem(
+                    i, 3, QtWidgets.QTableWidgetItem(str(record["technician_id"])))
+                self.records_table.setItem(
+                    i, 4, QtWidgets.QTableWidgetItem(str(record["blood_group"])))
+                self.records_table.setItem(
+                    i, 5, QtWidgets.QTableWidgetItem(str(record["quantity"])))
+
         self.set_alignment_for_all_items_in_records()
 
     def on_audit_changed(self,  keys, changes, read_time):
@@ -324,3 +340,26 @@ class MainManagementSystem(QtWidgets.QMainWindow):
                 item = self.inventory_table.item(row, column)
                 if item:
                     item.setTextAlignment(alignment)
+
+    def handle_export_inventory_click(self):
+        initial_name = "Blood Bank Inventory Report.pdf"
+        file_name = QFileDialog.getSaveFileName(self, 'Export to PDF',
+                                                os.path.join(os.path.expanduser('~'), initial_name), 'PDF(*.pdf)')
+        if file_name[0] != '':
+            records = BloodBankController.get_blood_inventory()
+            export_inventory_to_pdf(records, file_name[0])
+        else:
+            massage = "Please enter a file name."
+            title = "File Name Required"
+            text = "Please enter a file name."
+            self.WarningMassage(massage, title, text)
+
+    def log_logout(self):
+        AuditController.add(
+            {'action': 'logout', 'user_id': self.user_id, 'timestamp': firestore.SERVER_TIMESTAMP})
+        commit_batch(batch)
+
+    def closeEvent(self, event):
+        self.log_logout()
+        # Call the default closeEvent method to actually close the window
+        super().closeEvent(event)
