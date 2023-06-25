@@ -34,3 +34,13 @@ class UserController:
             return doc.to_dict()['role']
         else:
             return None
+        
+    @staticmethod
+    def sign_out_user(user_id):
+        try:
+            auth.revoke_refresh_tokens(user_id)
+            print("User signed out successfully")
+            return True
+        except Exception as e:
+            print("Sign out failed. Error:", str(e))
+            return False

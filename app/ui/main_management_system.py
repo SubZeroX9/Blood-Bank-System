@@ -32,9 +32,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         if self.user_role == Roles.ADMIN:
             self.AdminPermissions()
         elif self.user_role == Roles.TECHNICIAN:
-            #self.TechnicianPermissions()
-            self.AdminPermissions()
-
+            self.TechnicianPermissions()
         elif self.user_role == Roles.RESEARCH_STUDENT:
             self.ResearchStudentPermissions()
         elif self.user_role == Roles.DONOR:
@@ -43,7 +41,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             # This should never happen
             # show error message
             self.message_box("Error", "Invalid user role")
-            exit()
+            self.close()
 
         
         # self.handle_donations_tab()
@@ -233,6 +231,9 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.records_table.setRowCount(0)
         self.export_button.clicked.connect(self.handle_export_click)
         self.refresh_record_button.clicked.connect(self.handle_refresh_click)
+        if self.user_role == "research_student":
+            self.records_table.setColumnHidden(6, True)
+            self.records_table.setColumnHidden(7, True)
         self.update_records_table()
         self.records_listner = AuditController.add_audit_listener(
             self.on_audit_changed)
@@ -245,6 +246,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
 
     def handle_tab_click(self, index):
         if self.tabWidget.tabText(index) == "Close All":
+            UserController.sign_out_user(self.user_id)
             self.close()
 
     def handle_issue_blood_click(self):
@@ -341,7 +343,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
                                                 os.path.join(os.path.expanduser('~'), initial_name), 'PDF(*.pdf)')
         if file_name[0] != '':
             records = AuditController.get_records()
-            export_records_to_pdf(records, file_name[0])
+            export_records_to_pdf(records, file_name[0], self.user_role)
         else:
             massage = "Please enter a file name."
             title = "File Name Required"
