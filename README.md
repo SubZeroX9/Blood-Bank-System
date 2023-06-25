@@ -13,6 +13,7 @@ The Blood Bank System is a desktop application that helps manage blood donations
 - Dashboard to view blood bank information (number of donations, donors, and withdrawals)
 - Record blood withdrawals and donations, logs of activity
 - Generate PDF reports of Records and Inventory
+- Added HIPAA requirements for user access - App Ver3
 
 ## Installation
 
@@ -22,16 +23,26 @@ To install the Blood Bank System, follow these steps:
 2. Extract the zip file to a directory on your computer.
 3. Run the Blood Bank Manager.exe file to start the application.
 
+## User Types
+
+To access the system using different accounts:
+
+1. Admin account (email: admin@admin.com pass: 123456).
+2. Technician account (email: tech@tech.com pass: 123456)
+3. Research Student account (email: stud@stud.com pass: 123456)
+4. Donor account (email: donor@donor.com pass: 123456)
+
+
 ## Usage
 
 To use the Blood Bank System, follow these steps:
 
 1. Open the Blood Bank Manager.exe file.
-2. Create a new account (future) or login with an existing account(email: admin@admin.com pass: 123456).
-3. Navigate to the appropriate page to manage donations, blood bank inventory or Records.
-4. Use the appropriate buttons to add a donation or withdrawals and emergency withdrawals.
-5. Use the dashboard to view the current status of the blood bank.
-6. Use the report feature to generate PDF reports of all the records and inventory.
+2. Create a new account (future) or login with an existing account.
+3. Navigate to the appropriate page to manage donations, blood bank inventory or Records (Only accessable to account with sufficient permissions (admin)).
+4. Use the appropriate buttons to add a donation or withdrawals and emergency withdrawals (Only accessable to account with sufficient permissions (admin, technician)).
+5. Use the dashboard to view the current status of the blood bank (Only accessable to account with sufficient permissions (admin, technician)).
+6. Use the report feature to generate PDF reports of all the records and inventory (Only accessable to account with sufficient permissions (admin, research student)).
 
 ## Contributing
 

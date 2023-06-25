@@ -1,5 +1,5 @@
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, auth
 from Utils.resource_finder import resource_path
 
 
@@ -20,6 +20,12 @@ firebase_config = {
 
 db = firestore.client()
 batch = db.batch()
+
+def CreateCustomToken(uid,role):
+    additional_claims = {
+        'role': role
+    }
+    auth.create_custom_token(uid, additional_claims)
 
 
 def commit_batch(batch):

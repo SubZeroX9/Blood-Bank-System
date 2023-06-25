@@ -4,7 +4,8 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet
 
 
-def export_records_to_pdf(records, filename):
+
+def export_records_to_pdf(records, filename, user_role = None):
     pdf = SimpleDocTemplate(filename, pagesize=landscape(A3))
     styles = getSampleStyleSheet()
     title_style = styles['Heading1']
@@ -30,8 +31,8 @@ def export_records_to_pdf(records, filename):
             str(record["blood_group"]) if "blood_group" in record else "N/A",
             str(record["quantity"]) if "quantity" in record else "N/A",
             str(record["donor_full_name"]
-                ) if "donor_full_name" in record else "N/A",
-            str(record["donor_id"]) if "donor_id" in record else "N/A",
+                ) if "donor_full_name" in record and user_role == "admin" else "N/A",
+            str(record["donor_id"]) if "donor_id" in record and user_role == "admin" else "N/A",
         ]
         data.append(row)
 
