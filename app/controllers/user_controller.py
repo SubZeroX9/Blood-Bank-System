@@ -1,5 +1,5 @@
 import requests
-from firebase.firebase_config import firebase_config
+from firebase.firebase_config import *
 
 
 class UserController:
@@ -25,3 +25,12 @@ class UserController:
 
         print("Authentication succeeded")
         return result['localId']
+    
+    @staticmethod
+    def get_user_role(user_id):
+        doc_ref = db.collection('users').document(user_id)
+        doc = doc_ref.get()
+        if doc.exists:
+            return doc.to_dict()['role']
+        else:
+            return None

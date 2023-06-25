@@ -5,11 +5,12 @@ from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor
 from Utils.pdf_exporter import export_records_to_pdf, export_inventory_to_pdf
 from Utils.resource_finder import resource_path
-from firebase.firebase_config import commit_batch, batch
+from firebase.firebase_config import commit_batch, batch, CreateCustomToken
 from controllers.audit_controller import AuditController
 from controllers.blood_bank_controller import BloodBankController
 from firebase_admin import firestore
-
+from models.Roles import Roles
+from controllers.user_controller import UserController
 
 class MainManagementSystem(QtWidgets.QMainWindow):
 
@@ -23,18 +24,76 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.user_id = user_id  # Store the user ID as an attribute of the MainWindow class
+        self.user_role = UserController.get_user_role(user_id)
+        CreateCustomToken(self.user_id, self.user_role)
 
         self.tabWidget.currentChanged.connect(self.handle_tab_click)
 
-        self.handle_donations_tab()
-        self.handle_daily_issue_tab()
-        self.handle_emergency_issue_tab()
-        self.handle_audit_tab()
+        if self.user_role == Roles.ADMIN:
+            self.AdminPermissions()
+        elif self.user_role == Roles.TECHNICIAN:
+            #self.TechnicianPermissions()
+            self.AdminPermissions()
+
+        elif self.user_role == Roles.RESEARCH_STUDENT:
+            self.ResearchStudentPermissions()
+        elif self.user_role == Roles.DONOR:
+            self.DonorPermissions()
+        else:
+            # This should never happen
+            # show error message
+            self.message_box("Error", "Invalid user role")
+            exit()
+
+        
+        # self.handle_donations_tab()
+        # self.handle_daily_issue_tab()
+        # self.handle_emergency_issue_tab()
+        # self.handle_audit_tab()
         self.setEffects()
         # Call the function after 100 ms
         QTimer.singleShot(100, self.check_o_minus_avilability)
         self.loged_in_log()
 
+    def AdminPermissions(self):
+        self.handle_donations_tab()
+        self.handle_daily_issue_tab()
+        self.handle_emergency_issue_tab()
+        self.handle_audit_tab()
+
+    def TechnicianPermissions(self):
+        self.handle_donations_tab()
+        self.handle_daily_issue_tab()
+        self.CloseTabs(["Emergency", "Records"])
+
+    def ResearchStudentPermissions(self):
+        self.handle_audit_tab()
+        self.CloseTabs(["Donations","Emergency", "Inventory"])
+    
+    def DonorPermissions(self):
+        ##do something
+        pass
+
+    def CloseTabs(self, tabsToClose):
+        i = 0
+        while i < self.tabWidget.count():
+            if self.tabWidget.tabText(i) in tabsToClose:
+                self.tabWidget.removeTab(i)
+                i -= 1
+            i += 1
+            
+
+    def message_box(self, title, message):
+        msg = QMessageBox()
+        msg.setWindowTitle(title)
+        msg.setText(message)
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.exec()
+
+    def get_tab_index(self, TabName):
+        index = self.tabWidget.indexOf(self.tabWidget.findChild(self.tabWidget,TabName))
+        return index
+    
     def loged_in_log(self):
         AuditController.add({'action': 'login',
                              'user_id': self.user_id,
@@ -363,3 +422,5 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.log_logout()
         # Call the default closeEvent method to actually close the window
         super().closeEvent(event)
+
+    
