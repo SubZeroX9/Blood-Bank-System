@@ -53,20 +53,46 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         QTimer.singleShot(100, self.check_o_minus_avilability)
         self.loged_in_log()
 
+    def Handle_donations_question(self):
+        self.submit_Dquestion_btn.clicked.connect(self.submit_Dquest)
+
+    def submit_Dquest(self):
+        #check if combo box is yes
+        checked:bool = False
+        if self.Q1_CB.currentText()=="Yes":
+            checked = True
+        if self.Q2_CB.currentText()=="Yes":
+            checked = True
+        if self.Q3_CB.currentText()=="Yes":
+            checked = True
+        if self.Q4_CB.currentText()=="Yes":
+            checked = True
+        if self.Q5_CB.currentText()=="Yes":
+            checked = True
+        
+        if checked:
+            self.message_box("Warning", "You are not eligible to donate blood")
+        else:
+            self.message_box("All good!", "You are eligible to donate blood")
+
+
+
     def AdminPermissions(self):
         self.handle_donations_tab()
         self.handle_daily_issue_tab()
         self.handle_emergency_issue_tab()
         self.handle_audit_tab()
+        self.Handle_donations_question()
 
     def TechnicianPermissions(self):
         self.handle_donations_tab()
         self.handle_daily_issue_tab()
+        self.Handle_donations_question()
         self.CloseTabs(["Emergency", "Records"])
 
     def ResearchStudentPermissions(self):
         self.handle_audit_tab()
-        self.CloseTabs(["Donations","Emergency", "Inventory"])
+        self.CloseTabs(["Donations","Emergency", "Inventory", "Donation Questionnaire"])
     
     def DonorPermissions(self):
         ##do something
