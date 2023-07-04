@@ -1,5 +1,6 @@
 import os
 from PyQt6 import QtWidgets, uic
+import webbrowser
 from PyQt6.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor
@@ -31,8 +32,10 @@ class MainManagementSystem(QtWidgets.QMainWindow):
 
         if self.user_role == Roles.ADMIN:
             self.AdminPermissions()
+            QTimer.singleShot(100, self.check_o_minus_avilability)
         elif self.user_role == Roles.TECHNICIAN:
             self.TechnicianPermissions()
+            QTimer.singleShot(100, self.check_o_minus_avilability)
         elif self.user_role == Roles.RESEARCH_STUDENT:
             self.ResearchStudentPermissions()
         elif self.user_role == Roles.DONOR:
@@ -43,15 +46,18 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             self.message_box("Error", "Invalid user role")
             self.close()
 
-        
-        # self.handle_donations_tab()
-        # self.handle_daily_issue_tab()
-        # self.handle_emergency_issue_tab()
-        # self.handle_audit_tab()
+        self.handle_user_feedback()
         self.setEffects()
-        # Call the function after 100 ms
-        QTimer.singleShot(100, self.check_o_minus_avilability)
         self.loged_in_log()
+
+    def handle_user_feedback(self):
+        self.feedback_btn.clicked.connect(self.submit_feedback)
+
+    def submit_feedback(self):
+        # open default browser and go to provided link
+        webbrowser.open("https://forms.gle/3waREd2VkieRQ8N79")
+        
+
 
     def Handle_donations_question(self):
         self.submit_Dquestion_btn.clicked.connect(self.submit_Dquest)
@@ -87,16 +93,15 @@ class MainManagementSystem(QtWidgets.QMainWindow):
     def TechnicianPermissions(self):
         self.handle_donations_tab()
         self.handle_daily_issue_tab()
-        self.Handle_donations_question()
+        self.Handle_donations_question()       
         self.CloseTabs(["Emergency", "Records"])
 
     def ResearchStudentPermissions(self):
-        self.handle_audit_tab()
+        self.handle_audit_tab()     
         self.CloseTabs(["Donations","Emergency", "Inventory", "Donation Questionnaire"])
     
-    def DonorPermissions(self):
-        ##do something
-        pass
+    def DonorPermissions(self):   
+        self.CloseTabs(["Donations","Records","Emergency", "Inventory", "Donation Questionnaire"])
 
     def CloseTabs(self, tabsToClose):
         i = 0

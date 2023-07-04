@@ -94,7 +94,7 @@ bottom:-1px
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>5</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -1830,6 +1830,136 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
                 </property>
                 <property name="text">
                  <string>Submit</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="UserFeedback">
+       <attribute name="title">
+        <string>User Feedback</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_20">
+        <item>
+         <widget class="QFrame" name="frame_24">
+          <property name="styleSheet">
+           <string notr="true">*{border-image:none;
+background-color: rgba(255, 255, 255, 50);}
+</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_17">
+           <item alignment="Qt::AlignTop">
+            <widget class="QFrame" name="frame_25">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: none</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_13">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_16">
+                <property name="font">
+                 <font>
+                  <pointsize>45</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+</string>
+                </property>
+                <property name="text">
+                 <string>User Feedback</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+            <widget class="QFrame" name="frame_32">
+             <property name="styleSheet">
+              <string notr="true">background-color: none</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_19">
+              <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+               <widget class="QPushButton" name="feedback_btn">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>450</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">*{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 27, 31, 200), stop:1 rgba(184, 57, 65, 200));
+    border: 1px solid black;
+	color: rgb(255, 255, 255);
+	border-radius: 5px
+}
+
+*:hover{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(200, 60, 69, 200), stop:1 rgba(184, 57, 65, 200));
+    border: 1px solid black;
+	color: rgb(255, 255, 255);
+	border-radius: 5px
+}
+
+*:pressed{
+	
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(151, 45, 52, 227), stop:1 rgba(184, 57, 65, 255));
+    border: 1px solid black;
+	color: rgb(255, 255, 255);
+	border-radius: 5px
+}
+</string>
+                </property>
+                <property name="text">
+                 <string>Click here to open feedback form</string>
                 </property>
                </widget>
               </item>
