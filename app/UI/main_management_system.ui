@@ -94,7 +94,7 @@ bottom:-1px
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -1403,6 +1403,434 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
                   </widget>
                  </item>
                 </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="DonationQuestionnaire">
+       <attribute name="title">
+        <string>Donation Questionnaire</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_15">
+        <item>
+         <widget class="QFrame" name="frame_15">
+          <property name="styleSheet">
+           <string notr="true">*{border-image:none;
+background-color: rgba(255, 255, 255, 50);}
+</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_13">
+           <item alignment="Qt::AlignTop">
+            <widget class="QFrame" name="frame_16">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: none</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="font">
+                 <font>
+                  <pointsize>45</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+</string>
+                </property>
+                <property name="text">
+                 <string>Questionnaire</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_18">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QComboBox{
+color: rgb(255, 255, 255);
+border: 2px solid black;
+}
+
+QComboBox QListView{
+color: rgb(255, 255, 255);
+	selection-background-color: rgb(111, 111, 111);
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_16">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QFrame" name="frame_19">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QLabel" name="label_11">
+                   <property name="font">
+                    <font>
+                     <pointsize>15</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Do you have a cold, flu, sore throat, stomach bug or any other infection?</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="Q1_CB">
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Yes</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>No</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_20">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <item>
+                  <widget class="QLabel" name="label_12">
+                   <property name="font">
+                    <font>
+                     <pointsize>15</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Are you HIV positive?</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="Q2_CB">
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Yes</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>No</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_21">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                 <item>
+                  <widget class="QLabel" name="label_13">
+                   <property name="font">
+                    <font>
+                     <pointsize>15</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Have you ever injected drugs?</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="Q3_CB">
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Yes</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>No</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_22">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <widget class="QLabel" name="label_14">
+                   <property name="font">
+                    <font>
+                     <pointsize>15</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Are you pregnant or breastfeeding?</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="Q4_CB">
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Yes</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>No</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_23">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                 <item>
+                  <widget class="QLabel" name="label_15">
+                   <property name="font">
+                    <font>
+                     <pointsize>15</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Did you get a tatoo or body piercing in the last 6 months?</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="Q5_CB">
+                   <property name="font">
+                    <font>
+                     <pointsize>20</pointsize>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Yes</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>No</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
+            <widget class="QFrame" name="frame_17">
+             <property name="styleSheet">
+              <string notr="true">background-color: none</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <widget class="QPushButton" name="submit_Dquestion_btn">
+                <property name="minimumSize">
+                 <size>
+                  <width>300</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>20</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">*{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(89, 27, 31, 200), stop:1 rgba(184, 57, 65, 200));
+    border: 1px solid black;
+	color: rgb(255, 255, 255);
+	border-radius: 5px
+}
+
+*:hover{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(200, 60, 69, 200), stop:1 rgba(184, 57, 65, 200));
+    border: 1px solid black;
+	color: rgb(255, 255, 255);
+	border-radius: 5px
+}
+
+*:pressed{
+	
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(151, 45, 52, 227), stop:1 rgba(184, 57, 65, 255));
+    border: 1px solid black;
+	color: rgb(255, 255, 255);
+	border-radius: 5px
+}
+</string>
+                </property>
+                <property name="text">
+                 <string>Submit</string>
+                </property>
                </widget>
               </item>
              </layout>
