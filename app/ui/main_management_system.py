@@ -191,6 +191,9 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         for blood_group in self.blood_groups:
             self.blood_group_combo_box.addItem(blood_group)
 
+    def send_sms(self, phone_number, message):
+        pass
+
     def DonateBloodClicked(self):
         full_name = self.full_name_line_edit.text()
         if full_name == "":
@@ -251,6 +254,12 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             self.full_name_line_edit.setText("")
             self.id_number_line_edit.setText("")
             self.tech_id_line_edit.setText("")
+
+        phoneNum = self.phone_number_line_edit_3.text()
+        if phoneNum != "":
+            #send sms
+            message = f"Hello {full_name}, Thank you for donating blood. Your donation will save lives."
+            self.send_sms(phoneNum, message)
 
         self.CleanUI()
 

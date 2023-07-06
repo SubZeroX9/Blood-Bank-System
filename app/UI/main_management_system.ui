@@ -94,7 +94,7 @@ bottom:-1px
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -156,11 +156,8 @@ background-color: rgba(255, 255, 255, 50);}</string>
               <enum>QFrame::Raised</enum>
              </property>
              <layout class="QFormLayout" name="formLayout">
-              <property name="horizontalSpacing">
-               <number>40</number>
-              </property>
               <property name="verticalSpacing">
-               <number>40</number>
+               <number>50</number>
               </property>
               <item row="0" column="0">
                <widget class="QLabel" name="label_6">
@@ -215,7 +212,7 @@ border-radius: 8px;</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
+              <item row="1" column="0">
                <widget class="QLabel" name="label_5">
                 <property name="font">
                  <font>
@@ -236,7 +233,7 @@ padding: 2px;
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="1" column="1">
                <widget class="QLineEdit" name="id_number_line_edit">
                 <property name="font">
                  <font>
@@ -271,7 +268,87 @@ border-radius: 8px;</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_17">
+                <property name="font">
+                 <font>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>20</pointsize>
+                  <weight>9</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+padding: 2px;
+</string>
+                </property>
+                <property name="text">
+                 <string>Phone:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="phone_number_line_edit_3">
+                <property name="font">
+                 <font>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>20</pointsize>
+                  <weight>9</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+padding: 5px;
+background-color: rgba(110, 34, 38, 150);
+border: 1px solid rgba(255, 255, 255, 150);
+border-radius: 8px;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="maxLength">
+                 <number>15</number>
+                </property>
+                <property name="frame">
+                 <bool>true</bool>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Normal</enum>
+                </property>
+                <property name="placeholderText">
+                 <string>Phone number</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label">
+                <property name="font">
+                 <font>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>20</pointsize>
+                  <weight>9</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+padding: 2px;
+</string>
+                </property>
+                <property name="text">
+                 <string>Blood Group:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QComboBox" name="blood_group_combo_box"/>
+              </item>
+              <item row="4" column="0">
                <widget class="QLabel" name="label_7">
                 <property name="font">
                  <font>
@@ -292,7 +369,7 @@ padding: 2px;
                 </property>
                </widget>
               </item>
-              <item row="6" column="1">
+              <item row="4" column="1">
                <widget class="QLineEdit" name="tech_id_line_edit">
                 <property name="font">
                  <font>
@@ -324,30 +401,6 @@ border-radius: 8px;</string>
                 </property>
                 <property name="placeholderText">
                  <string>technician Id</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QComboBox" name="blood_group_combo_box"/>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label">
-                <property name="font">
-                 <font>
-                  <family>MS Shell Dlg 2</family>
-                  <pointsize>20</pointsize>
-                  <weight>9</weight>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">color: rgb(255, 255, 255);
-padding: 2px;
-</string>
-                </property>
-                <property name="text">
-                 <string>Blood Group:</string>
                 </property>
                </widget>
               </item>

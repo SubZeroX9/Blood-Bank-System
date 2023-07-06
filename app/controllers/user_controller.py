@@ -1,5 +1,6 @@
 import requests
 from firebase.firebase_config import *
+from models.donor import Donor
 
 
 class UserController:
@@ -34,7 +35,19 @@ class UserController:
             return doc.to_dict()['role']
         else:
             return None
+    
+    @staticmethod
+    def update_history(donor_id, history):
+        Donor.update_donor_history(donor_id, history)
         
+    @staticmethod
+    def add_new_donor_history(donor, history):
+        Donor.add_new_donor_history(donor, history)
+
+    @staticmethod
+    def find_donor(donor_id):
+        return Donor.is_donor_reg(donor_id)
+
     @staticmethod
     def sign_out_user(user_id):
         try:
