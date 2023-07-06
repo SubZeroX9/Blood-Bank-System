@@ -32,10 +32,12 @@ class MainManagementSystem(QtWidgets.QMainWindow):
 
         if self.user_role == Roles.ADMIN:
             self.AdminPermissions()
-            QTimer.singleShot(100, self.check_o_minus_avilability)
+            QTimer.singleShot(120, self.check_o_minus_avilability)
+            QTimer.singleShot(100, self.check_blood_availability)
         elif self.user_role == Roles.TECHNICIAN:
             self.TechnicianPermissions()
-            QTimer.singleShot(100, self.check_o_minus_avilability)
+            QTimer.singleShot(120, self.check_o_minus_avilability)
+            QTimer.singleShot(100, self.check_blood_availability)
         elif self.user_role == Roles.RESEARCH_STUDENT:
             self.ResearchStudentPermissions()
         elif self.user_role == Roles.DONOR:
@@ -136,11 +138,29 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             # There is not enough O- blood to issue for an emergency
             # Show a warning message
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setIcon(QMessageBox.Icon.Critical)
             msg.setText(
                 "There is not enough O- blood to issue for an emergency")
             msg.setWindowTitle("Warning")
             msg.exec()
+
+    def check_blood_availability(self):
+        # Check if there is enough blood to issue for a daily issue
+        blood_qnty_dict = BloodBankController.get_blood_inventory()
+        flag = False
+        alert_msg = "The following blood types are running low:\n"
+        for blood_type, quantity in blood_qnty_dict.items():
+            if quantity < 5:
+                alert_msg += f"{blood_type} has qty: {quantity}\n"
+                flag = True
+        if not flag: 
+            return
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText(alert_msg)
+        msg.setWindowTitle("Warning")
+        msg.exec()
+
 
     def on_inventory_changed(self, keys, changes, read_time):
         # This method will be called when blood inventory data changes in the Firebase database
