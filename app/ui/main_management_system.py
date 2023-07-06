@@ -1,6 +1,7 @@
 import os
 from PyQt6 import QtWidgets, uic
 import webbrowser
+import vonage
 from PyQt6.QtWidgets import QMessageBox, QGraphicsDropShadowEffect, QFileDialog
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor
@@ -51,6 +52,8 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.handle_user_feedback()
         self.setEffects()
         self.loged_in_log()
+        self.client = vonage.Client(key="c7186ca9", secret="dsFrR0JpwZE6TAvL")
+        self.sms = vonage.Sms(self.client)
 
     def handle_user_feedback(self):
         self.feedback_btn.clicked.connect(self.submit_feedback)
@@ -192,7 +195,18 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             self.blood_group_combo_box.addItem(blood_group)
 
     def send_sms(self, phone_number, message):
-        pass
+        responseData = self.sms.send_message(
+            {
+                "from": "Blood bank",
+                "to": phone_number,
+                "text": message,
+            }
+        )
+
+        if responseData["messages"][0]["status"] == "0":
+            print("Message sent successfully.")
+        else:
+            print(f"Message failed with error: {responseData['messages'][0]['error-text']}")
 
     def DonateBloodClicked(self):
         full_name = self.full_name_line_edit.text()
