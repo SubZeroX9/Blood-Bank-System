@@ -4,7 +4,6 @@ from UI.login import Login
 from UI.main_management_system import MainManagementSystem
 from controllers.blood_bank_controller import BloodBankController
 from UI.Main_Icons_rc import *
-from Utils.email_sender import send_email
 
 main_management_system_window = None
 
