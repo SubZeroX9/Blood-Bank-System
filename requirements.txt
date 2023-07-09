@@ -6,3 +6,4 @@ firebase
 firebase-auth
 pyinstaller
 PySide6
+python-dotenv

@@ -1,7 +1,7 @@
 from models.audit import Audit
 from firebase_admin import firestore
 from firebase.firebase_config import db, batch, commit_batch
-
+from controllers.user_controller import UserController
 
 class BloodBank:
 
@@ -30,6 +30,13 @@ class BloodBank:
             'user_id': user_id,
             'timestamp': firestore.SERVER_TIMESTAMP
         })
+
+        history = {"description": "donated blood pack","technician_id": staff_id, "timestamp": firestore.SERVER_TIMESTAMP}
+        if UserController.find_donor(donor_id):
+            UserController.update_history(donor_id, history)
+        else:
+            donor = {"blood_group": blood_type , "full_name": donor_full_name, "id": donor_id, "num_of_dons": 1}
+            UserController.add_new_donor_history(donor, history)
 
         return commit_batch(batch)
 

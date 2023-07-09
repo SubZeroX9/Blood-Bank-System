@@ -12,6 +12,8 @@ from controllers.blood_bank_controller import BloodBankController
 from firebase_admin import firestore
 from models.Roles import Roles
 from controllers.user_controller import UserController
+from Utils.email_sender import send_email
+
 
 class MainManagementSystem(QtWidgets.QMainWindow):
 
@@ -58,32 +60,28 @@ class MainManagementSystem(QtWidgets.QMainWindow):
     def submit_feedback(self):
         # open default browser and go to provided link
         webbrowser.open("https://forms.gle/3waREd2VkieRQ8N79")
-        
-
 
     def Handle_donations_question(self):
         self.submit_Dquestion_btn.clicked.connect(self.submit_Dquest)
 
     def submit_Dquest(self):
-        #check if combo box is yes
-        checked:bool = False
-        if self.Q1_CB.currentText()=="Yes":
+        # check if combo box is yes
+        checked: bool = False
+        if self.Q1_CB.currentText() == "Yes":
             checked = True
-        if self.Q2_CB.currentText()=="Yes":
+        if self.Q2_CB.currentText() == "Yes":
             checked = True
-        if self.Q3_CB.currentText()=="Yes":
+        if self.Q3_CB.currentText() == "Yes":
             checked = True
-        if self.Q4_CB.currentText()=="Yes":
+        if self.Q4_CB.currentText() == "Yes":
             checked = True
-        if self.Q5_CB.currentText()=="Yes":
+        if self.Q5_CB.currentText() == "Yes":
             checked = True
-        
+
         if checked:
             self.message_box("Warning", "You are not eligible to donate blood")
         else:
             self.message_box("All good!", "You are eligible to donate blood")
-
-
 
     def AdminPermissions(self):
         self.handle_donations_tab()
@@ -95,15 +93,17 @@ class MainManagementSystem(QtWidgets.QMainWindow):
     def TechnicianPermissions(self):
         self.handle_donations_tab()
         self.handle_daily_issue_tab()
-        self.Handle_donations_question()       
+        self.Handle_donations_question()
         self.CloseTabs(["Emergency", "Records"])
 
     def ResearchStudentPermissions(self):
-        self.handle_audit_tab()     
-        self.CloseTabs(["Donations","Emergency", "Inventory", "Donation Questionnaire"])
-    
-    def DonorPermissions(self):   
-        self.CloseTabs(["Donations","Records","Emergency", "Inventory", "Donation Questionnaire"])
+        self.handle_audit_tab()
+        self.CloseTabs(["Donations", "Emergency",
+                       "Inventory", "Donation Questionnaire"])
+
+    def DonorPermissions(self):
+        self.CloseTabs(["Donations", "Records", "Emergency",
+                       "Inventory", "Donation Questionnaire"])
 
     def CloseTabs(self, tabsToClose):
         i = 0
@@ -112,7 +112,6 @@ class MainManagementSystem(QtWidgets.QMainWindow):
                 self.tabWidget.removeTab(i)
                 i -= 1
             i += 1
-            
 
     def message_box(self, title, message):
         msg = QMessageBox()
@@ -122,9 +121,10 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         msg.exec()
 
     def get_tab_index(self, TabName):
-        index = self.tabWidget.indexOf(self.tabWidget.findChild(self.tabWidget,TabName))
+        index = self.tabWidget.indexOf(
+            self.tabWidget.findChild(self.tabWidget, TabName))
         return index
-    
+
     def loged_in_log(self):
         AuditController.add({'action': 'login',
                              'user_id': self.user_id,
@@ -153,14 +153,13 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             if quantity < 5:
                 alert_msg += f"{blood_type} has qty: {quantity}\n"
                 flag = True
-        if not flag: 
+        if not flag:
             return
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText(alert_msg)
         msg.setWindowTitle("Warning")
         msg.exec()
-
 
     def on_inventory_changed(self, keys, changes, read_time):
         # This method will be called when blood inventory data changes in the Firebase database
@@ -252,6 +251,13 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             self.id_number_line_edit.setText("")
             self.tech_id_line_edit.setText("")
 
+        email_adr = self.email_line_edit.text()
+        if email_adr != "":
+            # send mail
+            subject = "Blood Donation"
+            message = f"Hello {full_name},\nThank you for donating blood. Your donation will save lives."
+            send_email(email_adr, subject, message)
+
         self.CleanUI()
 
     def handle_daily_issue_tab(self):
@@ -294,6 +300,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.id_number_line_edit.clear()
         self.blood_group_combo_box.setCurrentIndex(0)
         self.tech_id_line_edit.clear()
+        self.email_line_edit.clear()
 
     def handle_tab_click(self, index):
         if self.tabWidget.tabText(index) == "Close All":
@@ -475,5 +482,3 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.log_logout()
         # Call the default closeEvent method to actually close the window
         super().closeEvent(event)
-
-    
