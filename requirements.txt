@@ -7,3 +7,6 @@ firebase-auth
 pyinstaller
 PySide6
 python-dotenv
+pytest-qt
+pytest
+pytest-mock
