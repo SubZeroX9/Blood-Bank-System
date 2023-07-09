@@ -14,6 +14,12 @@ The Blood Bank System is a desktop application that helps manage blood donations
 - Record blood withdrawals and donations, logs of activity
 - Generate PDF reports of Records and Inventory
 - Added HIPAA requirements for user access - App Ver3
+- Added registered donators contacts with donation history - App Ver4
+- Added guest donators contacts with donation history - App Ver4
+- Added feature to send thank you mail after donation - App Ver4
+- Added questionnaire to filter out bad donation - App Ver4
+- Added feedback questionnaire to allow clinic improvement - App Ver4
+- Added alert messages to notify when specific blood type is running low - App Ver4
 
 ## Installation
 
@@ -43,6 +49,8 @@ To use the Blood Bank System, follow these steps:
 4. Use the appropriate buttons to add a donation or withdrawals and emergency withdrawals (Only accessable to account with sufficient permissions (admin, technician)).
 5. Use the dashboard to view the current status of the blood bank (Only accessable to account with sufficient permissions (admin, technician)).
 6. Use the report feature to generate PDF reports of all the records and inventory (Only accessable to account with sufficient permissions (admin, research student)).
+7. Use the feedback feature to enter a website with a questionnaire (Only accessable to account with sufficient permissions (admin, donor)).
+8. Use the donation questionnaire to see if the blood donor needs to be rejected (Only accessable to account with sufficient permissions (admin, tech)).
 
 ## Contributing
 
