@@ -285,12 +285,12 @@ padding: 2px;
 </string>
                 </property>
                 <property name="text">
-                 <string>Phone:</string>
+                 <string>Email:</string>
                 </property>
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="phone_number_line_edit_3">
+               <widget class="QLineEdit" name="email_line_edit">
                 <property name="font">
                  <font>
                   <family>MS Shell Dlg 2</family>
@@ -311,7 +311,7 @@ border-radius: 8px;</string>
                  <string/>
                 </property>
                 <property name="maxLength">
-                 <number>15</number>
+                 <number>100</number>
                 </property>
                 <property name="frame">
                  <bool>true</bool>
@@ -320,7 +320,7 @@ border-radius: 8px;</string>
                  <enum>QLineEdit::Normal</enum>
                 </property>
                 <property name="placeholderText">
-                 <string>Phone number</string>
+                 <string>Email address</string>
                 </property>
                </widget>
               </item>

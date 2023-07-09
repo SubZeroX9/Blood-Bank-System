@@ -4,6 +4,7 @@ from UI.login import Login
 from UI.main_management_system import MainManagementSystem
 from controllers.blood_bank_controller import BloodBankController
 from UI.Main_Icons_rc import *
+from Utils.email_sender import send_email
 
 main_management_system_window = None
 
@@ -18,9 +19,7 @@ def on_login_successful(user_id):
 
 if __name__ == "__main__":
     BloodBankController.initialize_inventory()
-
     app = QApplication(sys.argv)
-
     login_window = Login()
     # Connect the custom signal to the slot function
     login_window.login_successful.connect(on_login_successful)
