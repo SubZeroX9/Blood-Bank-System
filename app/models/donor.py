@@ -5,8 +5,10 @@ class Donor:
     @staticmethod
     def add(donor):
         # Add donor to the database
-        doc_ref = db.collection('donors').add(donor)
-        return doc_ref[1].id
+        # doc_ref = db.collection('donors').add(donor)
+        #return doc_ref[1].id
+        _, doc_ref = db.collection('donors').add(donor)
+        return doc_ref.id
 
     @staticmethod
     def add_new_donor_history(donor, donor_history):
