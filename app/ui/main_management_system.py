@@ -13,7 +13,7 @@ from firebase_admin import firestore
 from models.Roles import Roles
 from controllers.user_controller import UserController
 from controllers.donor_controller import DonorController
-from Utils.email_sender import send_email
+from Utils.email_sender import send_email, send_coupon_by_mail
 
 
 class MainManagementSystem(QtWidgets.QMainWindow):
@@ -266,6 +266,7 @@ class MainManagementSystem(QtWidgets.QMainWindow):
             self.full_name_line_edit.setText("")
             self.id_number_line_edit.setText("")
             self.tech_id_line_edit.setText("")
+            self.check_valid_for_coupon(id_number)
 
         email_adr = self.email_line_edit.text()
         if email_adr != "":
@@ -276,6 +277,15 @@ class MainManagementSystem(QtWidgets.QMainWindow):
 
         self.CleanUI()
 
+    def check_valid_for_coupon(self, donor_nid):
+        if not  DonorController.is_registered(donor_nid):
+            return
+        
+        donor = DonorController.get_donor_by_nid(donor_nid)
+        if donor["num_of_dons"] % 5 == 0:
+            return send_coupon_by_mail(donor["contacts"]["email"])
+
+            
     def handle_daily_issue_tab(self):
         self.blood_group_filter.addItem("All")
         for blood_group in self.blood_groups:

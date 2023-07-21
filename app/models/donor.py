@@ -34,8 +34,16 @@ class Donor:
         else:
             return None
 
-
-
+    @staticmethod
+    def get_by_nid(donor_nid):
+        # Get donor by NID from the database
+        doc_ref = db.collection('donors').where(field_path='id', op_string='==', value=donor_nid).stream()
+        for doc in doc_ref:
+            if doc.exists:
+                return doc.to_dict()
+            else:
+                return None
+            
     @staticmethod
     def get_all():
         # Get all donors from the database

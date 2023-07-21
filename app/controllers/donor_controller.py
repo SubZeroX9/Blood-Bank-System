@@ -14,6 +14,16 @@ class DonorController:
         return Donor.get_by_id(donor_id)
 
     @staticmethod
+    def get_donor_by_nid(donor_nid):
+        # Get donor by NID from the database
+        return Donor.get_by_nid(donor_nid)
+
+    @staticmethod
+    def is_registered(donor_nid):
+        # Check if the donor is registered
+        return Donor.is_donor_reg(donor_nid)
+    
+    @staticmethod
     def get_all_donors():
         # Get all donors from the database
         return Donor.get_all()
