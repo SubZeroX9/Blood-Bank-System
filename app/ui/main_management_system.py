@@ -12,6 +12,7 @@ from controllers.blood_bank_controller import BloodBankController
 from firebase_admin import firestore
 from models.Roles import Roles
 from controllers.user_controller import UserController
+from controllers.donor_controller import DonorController
 from Utils.email_sender import send_email
 
 
@@ -64,6 +65,19 @@ class MainManagementSystem(QtWidgets.QMainWindow):
     def Handle_donations_question(self):
         self.submit_Dquestion_btn.clicked.connect(self.submit_Dquest)
 
+    def Handle_donor_profile(self):
+        donor = DonorController.get_donor_by_id(self.user_id)
+        if not donor:
+            self.profile_name.setText("N/A")
+            self.profile_id.setText("N/A")
+            self.profile_num_dons.setText("N/A")
+            self.profile_blood_type.setText("N/A")
+        else:
+            self.profile_name.setText(donor['full_name'])
+            self.profile_id.setText(donor['id'])
+            self.profile_num_dons.setText(str(donor['num_of_dons']))
+            self.profile_blood_type.setText(donor['blood_group'])
+
     def submit_Dquest(self):
         # check if combo box is yes
         checked: bool = False
@@ -89,19 +103,21 @@ class MainManagementSystem(QtWidgets.QMainWindow):
         self.handle_emergency_issue_tab()
         self.handle_audit_tab()
         self.Handle_donations_question()
+        self.Handle_donor_profile()
 
     def TechnicianPermissions(self):
         self.handle_donations_tab()
         self.handle_daily_issue_tab()
         self.Handle_donations_question()
-        self.CloseTabs(["Emergency", "Records"])
+        self.CloseTabs(["Emergency", "Records", "Profile"])
 
     def ResearchStudentPermissions(self):
         self.handle_audit_tab()
         self.CloseTabs(["Donations", "Emergency",
-                       "Inventory", "Donation Questionnaire"])
+                       "Inventory", "Donation Questionnaire", "Profile"])
 
     def DonorPermissions(self):
+        self.Handle_donor_profile()
         self.CloseTabs(["Donations", "Records", "Emergency",
                        "Inventory", "Donation Questionnaire"])
 
