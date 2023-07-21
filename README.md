@@ -20,6 +20,8 @@ The Blood Bank System is a desktop application that helps manage blood donations
 - Added questionnaire to filter out bad donation - App Ver4
 - Added feedback questionnaire to allow clinic improvement - App Ver4
 - Added alert messages to notify when specific blood type is running low - App Ver4
+- Added Profile Page for donors - App Ver5
+- Added Loyalty System (upon reaching multipliers of 5 donations) recieve Coupons by email -App Ver5
 
 ## Installation
 
@@ -37,7 +39,6 @@ To access the system using different accounts:
 2. Technician account (email: tech@tech.com pass: 123456)
 3. Research Student account (email: stud@stud.com pass: 123456)
 4. Donor account (email: donor@donor.com pass: 123456)
-
 
 ## Usage
 
