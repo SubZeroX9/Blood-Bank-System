@@ -26,6 +26,17 @@ class Donor:
                 return False
 
     @staticmethod
+    def get_by_id(donor_id):
+        doc_ref = db.collection('donors').document(donor_id)
+        doc = doc_ref.get()
+        if doc.exists:
+            return doc.to_dict()
+        else:
+            return None
+
+
+
+    @staticmethod
     def get_all():
         # Get all donors from the database
         docs = db.collection('donors').stream()
